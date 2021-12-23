@@ -9,7 +9,6 @@ repositories {
 
 
 println "version: $version"
-
 def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
 def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
 def repoUrl = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
@@ -20,7 +19,7 @@ release {
 }
 
 subprojects {
-    apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'maven-publish'
 
     repositories {
@@ -35,9 +34,9 @@ subprojects {
         }
         publications {
             "$project.name"(MavenPublication) {
-                groupId project.group
-                artifactId project.name
-                version project.version
+//                groupId project.group
+//                artifactId project.name
+//                version project.version
                 from components.java
             }
         }
