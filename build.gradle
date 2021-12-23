@@ -2,10 +2,33 @@ repositories {
     mavenCentral()
 }
 
+def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+def repoUrl = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+println "repoUrl path: $repoUrl.orNull"
+
+
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
 
     repositories {
         mavenCentral()
+    }
+
+    publishing {
+        repositories {
+            maven {
+                url repoUrl
+            }
+        }
+        publications {
+            mavenJava(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+            }
+        }
     }
 }
