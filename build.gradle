@@ -3,28 +3,26 @@ plugins {
     id 'net.researchgate.release' version '2.8.1'
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 
 
-println "version: $version"
+
+
+//println "version: $version"
 def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
 def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
 def repoUrl = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-println "repoUrl path: $repoUrl.orNull"
+//println "repoUrl path: $repoUrl.orNull"
 
-release {
 
-}
 
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
-
-    repositories {
-        mavenCentral()
-    }
 
     publishing {
         repositories {
@@ -42,4 +40,8 @@ subprojects {
         }
     }
     afterReleaseBuild.dependsOn publish
+}
+
+release {
+
 }
