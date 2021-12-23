@@ -8,6 +8,7 @@ repositories {
 }
 
 
+println "version: $version"
 
 def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
 def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
@@ -15,7 +16,7 @@ def repoUrl = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 println "repoUrl path: $repoUrl.orNull"
 
 release {
-    
+
 }
 
 subprojects {
@@ -41,4 +42,5 @@ subprojects {
             }
         }
     }
+    afterReleaseBuild.dependsOn publish
 }
