@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':example-multi-module1')
+    compile project(':example-multi-module2')
+}
+
+description = 'example-multi-module5'
