@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'net.researchgate.release' version '2.8.1'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
 allprojects {
@@ -8,8 +9,6 @@ allprojects {
         mavenCentral()
     }
 }
-
-
 
 
 //println "version: $version"
@@ -23,6 +22,13 @@ def repoUrl = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
+    apply plugin: "io.spring.dependency-management"
+
+    dependencyManagement {
+        dependencies {
+            dependency 'org.apache.commons:commons-lang3:3.12.0'
+        }
+    }
 
     publishing {
         repositories {

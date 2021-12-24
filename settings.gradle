@@ -6,3 +6,4 @@ rootProject.name = 'example-multi-module'
 include(':example-multi-module1')
 include(':example-multi-module2')
 include(':example-multi-module3')
+include(':example-multi-module4')
